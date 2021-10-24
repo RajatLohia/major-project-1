@@ -4,9 +4,16 @@
   "description": "my todo list",
   "main": "index.js",
   "dependencies": {
+    "connect-mongo": "^4.6.0",
+    "connect-mongodb-session": "^3.1.1",
     "ejs": "^3.1.2",
     "express": "^4.17.1",
-    "mongoose": "^5.9.10"
+    "express-session": "^1.17.2",
+    "mongoose": "^5.9.10",
+    "multer": "^1.4.3",
+    "passport": "^0.5.0",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0"
   },
   "devDependencies": {},
   "scripts": {

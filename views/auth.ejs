@@ -1,0 +1,30 @@
+<html>
+    <head>
+        <script src="https://kit.fontawesome.com/d1e9d1ba92.js" crossorigin="anonymous"></script>  
+        <title>
+            <%= locals.title %>
+        </title> 
+        <link rel="stylesheet" type="text/css" href="/css/home.css">
+    </head>
+    <body>
+        <div id="outer">
+            <div id="inner">
+        <h1 id='page-heading'>
+            <i class="far fa-clipboard"></i>
+            TICTACTICSTOE
+        </h1>
+        <form id="new-todo-task" action="/create-todo" method="POST">
+           <div >
+               <!-- <input type="text" id="description" name="description" placeholder="Description. What do you need to Ask?" required> -->
+               <li>
+                <a href="/users/sign-in"><i class="fas fa-sign-in-alt"></i> &nbsp sign-in</a>
+            </li>
+            <li>
+                <a href="/users/sign-up"><i class="fas fa-user-plus"></i>&nbsp sign-up</a>
+            </li>
+            </div>
+        </form>
+    </div>
+    </div>
+    </body>
+</html>

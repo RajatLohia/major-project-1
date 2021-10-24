@@ -1,24 +1,59 @@
 const todo = require('../models/todo');
+const category = require('../models/category');
 const db = require('../config/mongoose');
+const User = require('../models/users');
+
+module.exports.auth = function(req, res){
+    // return res.render('home',{
+    //     title:"HOME"
+    // });
+    
+    todo.find({},function(err,todos,user){
+        if(err)
+        {
+            console.log('error in fetching contacts');
+            return;
+        }
+    return res.render('auth',{
+        title: user,
+        todo_list: todos
+        // ProfileUser:
+        });
+    });
+}
 
 
 module.exports.home = function(req, res){
     // return res.render('home',{
     //     title:"HOME"
     // });
-    todo.find({},function(err,todos){
+    console.log(res.locals.user.name);
+    const username= res.locals.user.name
+    console.log(username);
+    category.find({},function(err,categories){
         if(err)
         {
             console.log('error in fetching contacts');
             return;
         }
-    return res.render('home',{
-        title:"Todo App",
-        todo_list: todos
-        });
+
+        todo.find({},function(err,todos){
+            if(err)
+            {
+                console.log('error in fetching contacts');
+                return;
+            }
+            const todo_listt= todos
+            console.log(todo_listt);
+            return res.render('home',{
+                title:"TicTacticsToe",
+                todo_list: todos,
+                name: username,
+                category_list: categories
+                });
+        })
     });
 }
-
 //creating a new task in the list 
 module.exports.createe = function(req, res){
 
@@ -30,6 +65,22 @@ module.exports.createe = function(req, res){
     }, function(err,newTask){
         if(err){
             console.log("error in creating a task");
+            return res.redirect('back');
+        }   
+        console.log('******',newTask);
+        return res.redirect('back');
+    });
+}
+
+module.exports.createcategory = function(req, res){
+
+    console.log(req.body);
+    category.create({
+        description: req.body.category,
+    }, function(err,newTask){
+        if(err){
+            console.log("error in creating a new category");
+            console.log(err);
             return res.redirect('back');
         }   
         console.log('******',newTask);

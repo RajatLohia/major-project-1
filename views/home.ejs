@@ -9,31 +9,46 @@
     <body>
         <div id="outer">
             <div id="inner">
+        <div>
         <h1 id='page-heading'>
             <i class="far fa-clipboard"></i>
-            ToDo App
+            TICTACTICSTOE
+            <a href="/users/sign-out"><i class="fas fa-sign-out-alt"></i>sign-out</a>
         </h1>
+            
+        </div>
         <form id="new-todo-task" action="/create-todo" method="POST">
            <div >
-               <input type="text" id="description" name="description" placeholder="Description. What do you need to do?" required>
+               <input type="text" id="description" name="description" placeholder="Description. What do you need to Ask?" required>
             </div>
             <div>
                 <select id="category" name="category" placeholder="chose a category" required>
                     <option value="" disabled selected hidden>Choose a category</option>
-                    <option>Personal</option>
-                    <option>work</option>
-                    <option>school</option>
-                    <option>cleaning</option>
-                    <option>other</option>
-                <input type="text" onfocus="(this.type='date')" id="date" name="date" placeholder="DueDate" required>
+                    
+                <!-- <input type="text" onfocus="(this.type='date')" id="date" name="date" placeholder="DueDate" required> -->
+            
+                <% for(let i of category_list) { %>
+                        <option><%= i.description%></option>
+                <% } %>
+            
             </div>
                <div id="buttons"> 
-                   <input id="submitbutton" type="submit" value="Add task">
+                   <input id="submitbutton" type="submit" value="Add Querry">
                 </div>
         </form>
+        <% if (locals.name=='admin'){ %>
+            <form id="new-category" action="/create-category" method="POST">
+                <div >
+                    <input type="text" id="description" name="category" placeholder="Category Name" required>
+                 </div>
+                    <div id="buttons"> 
+                        <input id="submitbutton" type="submit" value="Add Category">
+                     </div>
+             </form>
+        <% } %>
         <div>
+           
             <ul>
-                
                 <% for(let i of todo_list) { %>
                     <section>
                     <li id="task-container">
@@ -54,6 +69,7 @@
             </section>
                 <% } %>
             </ul>
+            
         </div>
     </div>
     </div>

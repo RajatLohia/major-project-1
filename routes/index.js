@@ -3,12 +3,14 @@ const express = require('express');
 const router= express.Router();
 const homeController = require('../controllers/home_controller');
 
+// router.get('/',homeController.auth);
+router.use('/users',require('./users'));
 //to load the basic page of our app
-router.get('/',homeController.home);
-
+router.get('/',homeController.auth);
+router.get('/home',homeController.home);
 //route for creating a task
 router.post('/create-todo', homeController.createe);
-
+router.post('/create-category', homeController.createcategory);
 //route for deleting a task
 router.use('/delete-todo',homeController.delete);
 
