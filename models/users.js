@@ -18,6 +18,12 @@ const userSchema = new mongoose.Schema({
         type:String,
         required:true
     },
+    mycategories: [
+        {
+            type:mongoose.Schema.Types.ObjectId,
+            ref: 'category'
+        }
+    ]
 },{
     timestamps:true
 });

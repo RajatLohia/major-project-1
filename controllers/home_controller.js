@@ -27,9 +27,9 @@ module.exports.home = function(req, res){
     // return res.render('home',{
     //     title:"HOME"
     // });
-    console.log(res.locals.user.name);
+    // console.log(res.locals.user.name);
     const username= res.locals.user.name
-    console.log(username);
+    // console.log(username);
     category.find({},function(err,categories){
         if(err)
         {
@@ -44,7 +44,7 @@ module.exports.home = function(req, res){
                 return;
             }
             const todo_listt= todos
-            console.log(todo_listt);
+            // console.log(todo_listt);
             return res.render('home',{
                 title:"TicTacticsToe",
                 todo_list: todos,
@@ -61,7 +61,7 @@ module.exports.createe = function(req, res){
     todo.create({
         description: req.body.description,
         category: req.body.category,
-        date: req.body.date
+        username: res.locals.user._id
     }, function(err,newTask){
         if(err){
             console.log("error in creating a task");
@@ -83,7 +83,23 @@ module.exports.createcategory = function(req, res){
             console.log(err);
             return res.redirect('back');
         }   
-        console.log('******',newTask);
+        // console.log('******',newTask);
+        return res.redirect('back');
+    });
+}
+
+module.exports.createmycategory = function(req, res){
+
+    console.log(req.body);
+    category.create({
+        description: req.body.category,
+    }, function(err,newTask){
+        if(err){
+            console.log("error in creating a new category");
+            console.log(err);
+            return res.redirect('back');
+        }   
+        // console.log('******',newTask);
         return res.redirect('back');
     });
 }
@@ -93,6 +109,11 @@ module.exports.delete = function(req, res){
 
     let id=req.query.id;
     //find the contact in the databse using id and delete
+    console.log(req.user.id);
+    console.log("1");
+    console.log(req.query.username);
+    if(req.user.id == req.query.username)
+    {
     todo.findByIdAndDelete(id,function(err){
         if(err)
         {
@@ -100,5 +121,6 @@ module.exports.delete = function(req, res){
             return;
         }
     });
+    }
     return res.redirect('back');
 }

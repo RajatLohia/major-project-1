@@ -36,6 +36,32 @@
                    <input id="submitbutton" type="submit" value="Add Querry">
                 </div>
         </form>
+
+        <div>
+            
+            <h1>ALL CATEGORIES</h1>
+            <ul>
+                <% for(let i of category_list) { %>
+                    <section>
+                    <div class="details">
+                        <p>
+                            <i class="far fa-calendar-alt"></i>
+                            <%= i.description%>
+
+                            <form id="new-category" action="/create-mycategory" method="POST">
+                                    <div id="buttons"> 
+                                        <input id="submitbutton" type="submit" value="Subscribe">
+                                     </div>
+                            </form>
+
+                        </p>
+                    </div> 
+            </section>
+                <% } %>
+            </ul>
+            
+        </div>
+
         <% if (locals.name=='admin'){ %>
             <form id="new-category" action="/create-category" method="POST">
                 <div >
@@ -46,6 +72,25 @@
                      </div>
              </form>
         <% } %>
+
+        <div>
+            
+            <h1>MY CATEGORIES</h1>
+            <ul>
+                <% for(let i of category_list) { %>
+                    <section>
+                    <div class="details">
+                        <p>
+                            <i class="far fa-calendar-alt"></i>
+                            <%= i.description%>
+                        </p>
+                    </div> 
+            </section>
+                <% } %>
+            </ul>
+            
+        </div>
+
         <div>
            
             <ul>
@@ -61,7 +106,7 @@
                         <p><i class="fab fa-battle-net"></i><%= i.category %></p>
                     </div> 
                     <div class="delete-button">
-                        <a href="/delete-todo/?id=<%=i.id %>"> 
+                        <a href="/delete-todo/?id=<%=i.id%>&username=<%=i.username%>"> 
                             <i class="fas fa-trash-alt"></i>
                         </a>
                     </div>
